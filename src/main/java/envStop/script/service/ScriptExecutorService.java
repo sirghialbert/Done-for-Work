@@ -5,6 +5,7 @@ import envStop.script.util.PathUtils;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -53,15 +54,18 @@ public class ScriptExecutorService {
         Path excludedFile = Paths.get(properties.getExcludedFilePath());
 
         if (Files.exists(excludedFile)) {
-            try (BufferedReader reader = Files.newBufferedReader(excludedFile)) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(excludedFile.toFile()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    excludedPaths.add(line.trim());
-                    System.out.println("Excluded path loaded: " + line.trim());
+                    String trimmedLine = line.trim();
+                    excludedPaths.add(trimmedLine);
                 }
+                System.out.println("Excluded paths loaded from " + properties.getExcludedFilePath());
             }
         } else {
-            System.out.println("No excluded paths file found.");
+
+            Files.createFile(excludedFile);
+            System.out.println("Excluded file not found. A new excluded file has been created at: " + excludedFile);
         }
 
         return excludedPaths;
