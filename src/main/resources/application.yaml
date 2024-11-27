@@ -1,0 +1,18 @@
+stop:
+  services:
+    excludedFilePath: "excluded.txt"
+    scriptName: "Services.sh"
+    usersToCheck:
+      - user1
+      - user2
+    logsDir: "logs"
+
+server:
+  port: 8127
+logging:
+  level:
+    envStop:
+      script: DEBUG
+spring:
+  application:
+    name: ScriptApplication
