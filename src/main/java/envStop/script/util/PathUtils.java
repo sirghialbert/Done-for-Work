@@ -35,7 +35,7 @@ public class PathUtils {
 
     public static boolean isLogModifiedRecently(Path logsDir) {
         try {
-            Instant twentyFourHoursAgo = Instant.now().minusSeconds(1);
+            Instant twentyFourHoursAgo = Instant.now().minusSeconds(24*60*60);
             boolean modifiedRecently = Files.walk(logsDir)
                     .filter(Files::isRegularFile)
                     .anyMatch(file -> {

@@ -12,7 +12,7 @@ public class SchedulerConfig  {
 
     private final ScriptExecutorService scriptExecutorService;
 
-    @Scheduled(cron = "0 * * * * *", zone = "Europe/Bucharest")
+    @Scheduled(cron = "0 0 0 * * *", zone = "Europe/Bucharest")
     public void executeScriptEveryMinute() {
         System.out.println("Running script every minute...");
         scriptExecutorService.executeScriptIfLogsUnchanged();

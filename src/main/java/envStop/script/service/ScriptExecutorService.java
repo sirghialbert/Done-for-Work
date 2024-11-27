@@ -32,7 +32,6 @@ public class ScriptExecutorService {
             for (Path envPath : envPaths) {
                 System.out.println("Processing environment: " + envPath);
 
-                // Excludem căile din fișierul de excluderi
                 if (PathUtils.isExcluded(envPath, excludedPaths)) {
                     continue;
                 }
